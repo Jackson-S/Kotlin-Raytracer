@@ -9,7 +9,7 @@ import shapes.impl.Sphere
 import kotlin.random.Random
 
 fun randomScene(): Scene {
-    val scene = Scene();
+    val scene = Scene()
 
     val groundMaterial = Lambertian(Colour(.5, .5, .5))
     scene.addObject(Sphere(Point3(0.0, -1000.0, 0.0), 1000.0, groundMaterial))

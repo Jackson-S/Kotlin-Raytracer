@@ -13,10 +13,12 @@ class EmptySphere(
     private val thickness: Double,
     override val material: Material
 ) : Shape {
-    private val scene = Scene(mutableListOf(
-        Sphere(center, radius, material),
-        Sphere(center, -(radius - thickness), material)
-    ))
+    private val scene = Scene(
+        mutableListOf(
+            Sphere(center, radius, material),
+            Sphere(center, -(radius - thickness), material)
+        )
+    )
 
     override fun hit(ray: Ray, tRange: ClosedRange<Double>): HitRecord? = scene.hit(ray, tRange)
 

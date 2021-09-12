@@ -3,7 +3,6 @@ package materials.impl
 import datatypes.Colour
 import datatypes.HitRecord
 import datatypes.Ray
-import datatypes.Vec3
 import materials.Material
 import java.lang.Double.min
 import kotlin.math.pow
@@ -12,7 +11,7 @@ import kotlin.random.Random
 
 class Dielectric(
     private val indexOfRefraction: Double
-): Material {
+) : Material {
     override val name: String
         get() = "dielectric"
 

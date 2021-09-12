@@ -7,22 +7,18 @@ import java.nio.file.Path
 
 fun main() {
     val startTime = System.currentTimeMillis()
-    val ratio = 16.0 / 9.0
+    val ratio = 3.0 / 2.0
     val width = 1200
     val height = (width / ratio).toInt()
     val samplesPerPixel = 500
     val maximumDepth = 50
 
-    val scene = FileInput(Path.of("./Scenes", "basic scene dielectric.txt")).load()
+    val scene = FileInput(Path.of("./Scenes", "final scene.txt")).load()
 
-    // val origin = Point3(13.0, 2.0, 3.0)
-    // val target = Point3()
-    // val focalDistance = 10.0
-
-    val origin = Point3(.0, .0, 1.0)
+    val origin = Point3(13.0, 2.0, 3.0)
     val target = Point3()
-    val fieldOfView = 90.0
-    val focalDistance = 1.5
+    val focalDistance = 10.0
+    val fieldOfView = 20.0
 
     val camera = Camera(
         aspectRatio = ratio,

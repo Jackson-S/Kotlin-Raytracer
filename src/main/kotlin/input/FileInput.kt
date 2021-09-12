@@ -13,7 +13,7 @@ import kotlin.io.path.reader
 
 class FileInput(
     private val path: Path
-): Input {
+) : Input {
     override fun load(): Scene {
         val file = path.reader(Charsets.UTF_8)
 

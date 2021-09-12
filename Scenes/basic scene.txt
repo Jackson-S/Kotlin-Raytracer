@@ -1,0 +1,8 @@
+M lambertian 0.8 0.8 0.0
+S sphere 0.0 -100.5 -1.0 100.0
+M lambertian 0.7 0.3 0.3
+S sphere 0.0 0.0 -1.0 0.5
+M metal 0.8 0.8 0.8 0.3
+S sphere -1.0 0.0 -1.0 0.5
+M metal 0.8 0.6 0.2 1.0
+S sphere 1.0 0.0 -1.0 0.5

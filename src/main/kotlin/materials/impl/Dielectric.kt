@@ -11,7 +11,7 @@ import kotlin.random.Random
 
 class Dielectric(
     private val indexOfRefraction: Double
-) : Material {
+): Material {
     override val name: String
         get() = "dielectric"
 
@@ -34,7 +34,7 @@ class Dielectric(
         }
 
         return Pair(
-            Ray(hitRecord.p, direction),
+            Ray(hitRecord.p, direction, rayIn.time),
             Colour(1.0, 1.0, 1.0)
         )
     }

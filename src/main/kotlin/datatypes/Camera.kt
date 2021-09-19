@@ -14,14 +14,15 @@ class Camera(
     val rotation: Vec3 = Vec3(y = 1.0),
     val aspectRatio: Double,
     val aperture: Double,
-    val focalDistance: Double
+    val focalDistance: Double,
+    val shutterLength: Double = 0.0,
 ) {
     val w = (origin - target).unitVector()
     val u = (rotation cross w).unitVector()
     val v = w cross u
 
     private val viewportHeight = 2.0 * tan(Math.toRadians(verticalFieldOfView) / 2.0)
-    val viewportWidth = aspectRatio * viewportHeight
+    private val viewportWidth = aspectRatio * viewportHeight
     private val horizontal = focalDistance * viewportWidth * u
     private val vertical = focalDistance * viewportHeight * v
     private val lowerLeftCorner = origin - horizontal / 2.0 - vertical / 2.0 - focalDistance * w
@@ -56,7 +57,10 @@ class Camera(
         val rd = lensRadius * Vec3.randomInUnitDisk()
         val offset = u * rd.x + v * rd.y
 
-        return Ray(origin + offset, lowerLeftCorner + s * horizontal + t * vertical - origin - offset)
+        return Ray(
+            origin = origin + offset,
+            direction = lowerLeftCorner + s * horizontal + t * vertical - origin - offset,
+            time = if (shutterLength == 0.0) 0.0 else Random.nextDouble(0.0, shutterLength))
     }
 
     private fun printProgress(linesRemaining: Int) {

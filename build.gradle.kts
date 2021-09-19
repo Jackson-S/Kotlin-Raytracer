@@ -15,6 +15,7 @@ repositories {
 
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2-native-mt")
+    implementation("com.soywiz.korlibs.korim:korim:2.2.2")
 }
 
 tasks.withType<KotlinCompile> {

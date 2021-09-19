@@ -8,6 +8,4 @@ interface Shape {
     val material: Material?
 
     fun hit(ray: Ray, tRange: ClosedRange<Double>): HitRecord?
-
-    fun output(): String
 }

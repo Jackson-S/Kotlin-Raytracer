@@ -25,7 +25,7 @@ class Lambertian(
         }
 
         return Pair(
-            Ray(hitRecord.p, scatterDirection),
+            Ray(hitRecord.p, scatterDirection, rayIn.time),
             albedo
         )
     }

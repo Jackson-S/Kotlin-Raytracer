@@ -2,6 +2,7 @@ package materials
 
 import datatypes.Colour
 import datatypes.HitRecord
+import datatypes.Point3
 import datatypes.Ray
 
 interface Material {

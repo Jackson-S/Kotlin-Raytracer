@@ -4,7 +4,8 @@ import extensions.times
 
 class Ray(
     val origin: Point3,
-    val direction: Vec3
+    val direction: Vec3,
+    val time: Double = 0.0
 ) {
     fun at(t: Double) = origin + t * direction
 

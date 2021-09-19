@@ -29,21 +29,4 @@ class Scene(
 
         return closestValue
     }
-
-    override fun output(): String {
-        var currentMaterial: String = ""
-        val outputList = mutableListOf<String>()
-        val sortedChildren = children.sortedBy { it.material!!.output }
-
-        sortedChildren.forEach {
-            if (currentMaterial != it.material?.output) {
-                currentMaterial = it.material!!.output
-                outputList.add(it.material!!.output)
-            }
-
-            outputList.add(it.output())
-        }
-
-        return outputList.joinToString("\n") { it }
-    }
 }

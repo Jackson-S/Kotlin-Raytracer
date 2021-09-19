@@ -19,7 +19,7 @@ class Metal(
 
     override fun scatter(rayIn: Ray, hitRecord: HitRecord): Pair<Ray, Colour>? {
         val reflected = rayIn.direction.unitVector().reflect(hitRecord.normal)
-        val scattered = Ray(hitRecord.p, reflected + Vec3.randomInUnitSphere() * fuzz)
+        val scattered = Ray(hitRecord.p, reflected + Vec3.randomInUnitSphere() * fuzz, rayIn.time)
         return when (scattered.direction dot hitRecord.normal > 0) {
             true -> Pair(scattered, albedo)
             false -> null

@@ -1,2 +1,2 @@
 
-rootProject.name = "RaytracerKotlinParallel"
+rootProject.name = "Kotlin-Raytracer"

@@ -1,25 +1,41 @@
 package shapes.impl
 
-import datatypes.HitRecord
-import datatypes.Point3
-import datatypes.Ray
-import datatypes.Vec3
+import datatypes.*
 import materials.Material
 import shapes.Shape
 import kotlin.math.pow
 import kotlin.math.sqrt
 
 class Sphere(
-    private val centerStart: Point3,
-    private val centerEnd: Point3,
-    private val duration: Double,
+    override val movement: Movement,
     private val radius: Double,
-    override val material: Material,
+    val material: Material
 ) : Shape {
 
-    constructor(center: Point3, radius: Double, material: Material) : this(center, center, 0.0, radius, material)
+    /**
+     * Constructor for a motionless sphere
+     */
+    constructor(
+        center: Point3,
+        radius: Double,
+        material: Material
+    ) : this(
+        movement = Movement(center),
+        radius = radius,
+        material = material
+    )
 
-    override fun hit(ray: Ray, tRange: ClosedRange<Double>): HitRecord? {
+    constructor(
+        positions: Pair<Point3, Point3>,
+        timeRange: ClosedFloatingPointRange<Double>,
+        radius: Double,
+        material: Material
+    ) : this(
+        movement = Movement(positions.first, positions.second, timeRange.start, timeRange.endInclusive),
+        radius = radius,
+        material = material)
+
+    override fun hit(ray: Ray, tRange: ClosedFloatingPointRange<Double>): HitRecord? {
         val oc = ray.origin - center(ray.time)
         val a = ray.direction.lengthSquared()
         val halfB = oc dot ray.direction
@@ -46,7 +62,25 @@ class Sphere(
         )
     }
 
-    private fun center(time: Double): Point3 = centerStart + (duration / time) * (centerEnd - centerStart)
+    override fun boundingBox(time: ClosedFloatingPointRange<Double>): AxisAlignedBoundingBox {
+        val box0 = AxisAlignedBoundingBox(
+            center(movement.startTime) - Vec3(radius, radius, radius),
+            center(movement.startTime) + Vec3(radius, radius, radius)
+        )
+        val box1 = AxisAlignedBoundingBox(
+            center(movement.endTime) - Vec3(radius, radius, radius),
+            center(movement.endTime) + Vec3(radius, radius, radius)
+        )
+        return AxisAlignedBoundingBox.surroundingBox(box0, box1)
+    }
+
+    private fun center(time: Double): Point3 =
+        if (movement.hasMovement) {
+            movement.startPosition + ((time - movement.startTime) / movement.duration) * (movement.endPosition!! - movement.startPosition)
+        } else {
+            movement.startPosition
+        }
+
 
     private operator fun Double.div(other: Vec3) = other * (1 / this)
 

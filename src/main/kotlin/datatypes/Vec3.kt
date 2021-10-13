@@ -6,7 +6,7 @@ import kotlin.math.min
 import kotlin.math.sqrt
 import kotlin.random.Random
 
-open class Vec3(var x: Double = .0, var y: Double = .0, var z: Double = .0) {
+class Vec3(var x: Double = .0, var y: Double = .0, var z: Double = .0) {
 
     constructor(x: Int, y: Int, z: Int) : this(x.toDouble(), y.toDouble(), z.toDouble())
     constructor(x: Double, y: Int, z: Int) : this(x, y.toDouble(), z.toDouble())

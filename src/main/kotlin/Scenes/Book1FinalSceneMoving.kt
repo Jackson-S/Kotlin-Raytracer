@@ -31,22 +31,21 @@ object Book1FinalSceneMoving {
 
                 if ((center - Point3(4.0, 0.2, 0)).length() > 0.9) {
                     val sphereMaterial: Material = if (chooseMat < 0.8) {
-                        // Diffuse
-                        val albedo = Colour.random() * Colour.random()
-                        Lambertian(albedo)
-                    } else if (chooseMat < 0.95) {
-                        val albedo = Colour.random(0.5, 1.0)
-                        val fuzz = Random.nextDouble(.0, 0.5)
-                        Metal(albedo, fuzz)
-                    } else {
-                        Dielectric(1.5)
-                    }
+                            // Diffuse
+                            val albedo = Colour.random() * Colour.random()
+                            Lambertian(albedo)
+                        } else if (chooseMat < 0.95) {
+                            val albedo = Colour.random(0.5, 1.0)
+                            val fuzz = Random.nextDouble(.0, 0.5)
+                            Metal(albedo, fuzz)
+                        } else {
+                            Dielectric(1.5)
+                        }
 
                     scene.addObject(if (chooseMat < .8) {
                         Sphere(
-                            centerStart = center,
-                            centerEnd = center + Vec3(0, Random.nextDouble(.0,.5), 0),
-                            duration = 1.0,
+                            positions = Pair(center,  center + Vec3(0, Random.nextDouble(.0,.5), 0)),
+                            timeRange = 0.0..1.0,
                             radius = 0.2,
                             material = sphereMaterial
                         )
